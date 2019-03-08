@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties/>
+<mapper namespace="com.zy.user.dao.UserDaoMapper">
+
+<select id="getUserAll" resultType="com.zy.user.pojo.User">
+   select * from user where 1=1
+<if test="user.us_email !=null and us_email != ''">
+    and us_email = #{user.us_email}
+</if>
+<if test="user.us_name !=null and us_name != ''">
+    and us_name = #{user.us_name}
+</if>
+<if test="user.us_password!=null and us_password != ''">
+    and us_password = #{user.us_password}
+</if>
+<if test="user.us_money !=null and us_money!= ''">
+    and us_money = #{user.us_money}
+</if>
+<if test="user.us_idcard !=null and us_idcard != ''">
+    and us_idcard = #{user.us_idcard}
+</if>
+<if test="user.us_phone !=null and us_phone != ''">
+    and us_phone = #{user.us_phone}
+</if>
+<if test="user.us_address !=null and us_address != ''">
+    and us_address = #{user.us_address}
+</if>
+<if test="user.us_role !=null and us_role != ''">
+    and us_role = #{user.us_role}
+</if>
+<if test="user.us_sex !=null and us_sex != ''">
+    and us_sex = #{user.us_sex}
+</if>
+<if test="user.us_code !=null and us_code != ''">
+    and us_code = #{user.us_code}
+</if>
+
+</select>
+
+<insert id="addUser" parameterType="com.zy.user.pojo.User">
+    INSERT INTO `user`(`us_email`,`us_name`,`us_password`,`us_money`,`us_phone`,`us_address`,`us_role`,`us_sex`,`us_code`)
+    VALUES (#{us_email},#{us_name},#{us_password},#{us_money},#{us_phone},#{us_address},#{us_role},#{us_sex},#{us_code});
+</insert>
+<update id="upUser" parameterType="com.zy.user.pojo.User">
+    UPDATE user
+    SET
+    `us_email` = #{us_email},
+    `us_name` = #{us_name},
+    `us_password` = #{us_password},
+    `us_money` = #{us_money},
+    `us_phone` = #{us_phone},
+    `us_address` = #{us_address},
+    `us_role` = #{us_role},
+    `us_sex` = #{us_sex},
+    `us_code` = #{us_code},
+
+    WHERE `us_id` = #{us_id};
+</update>
+
+
+<delete id="delById" parameterType="java.lang.String">
+    delete from house where us_id in(${ids})
+</delete>
+
+<select id="getUserOne" parameterType="java.lang.Integer" resultType="com.zy.user.pojo.User">
+    select *  from  house  where us_id = #{us_id}
+</select>
+
+<select id="queryByIds" parameterType="java.lang.String" resultType="com.zy.user.pojo.User">
+    select *  from house where us_id in(${ids})
+</select>
+
+
+
+
+
+
+
+
+</mapper>
